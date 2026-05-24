@@ -414,7 +414,7 @@ with macro_col1:
         markers=True
     )
 
-    interest_fig.update_traces(line=dict(color="#1E90FF", width=3), marker=dict(size=10))
+    interest_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
     interest_fig.update_layout(
         template="plotly_dark",
         height=350,
@@ -460,7 +460,7 @@ with macro_col1:
         markers=True
     )
 
-    kur_fig.update_traces(line=dict(color="#32CD32", width=3), marker=dict(size=10))
+    kur_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
     kur_fig.update_layout(
         template="plotly_dark",
         height=350,
@@ -482,7 +482,7 @@ with macro_col2:
         markers=True
     )
 
-    gold_fig.update_traces(line=dict(color="#FFA500", width=3), marker=dict(size=10))
+    gold_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
     gold_fig.update_layout(
         template="plotly_dark",
         height=350,
@@ -526,7 +526,7 @@ with macro_col2:
         y="Budget_Balance",
         title="Budget Balance",
         color="Budget_Balance",
-        color_continuous_scale=["#FF6B9D", "#FFA500", "#32CD32"]
+        color_continuous_scale=["#FF6B9D", "#95a5a6", "#32CD32"]
     )
 
     budget_fig.update_layout(
@@ -657,7 +657,7 @@ if show_volume:
         title='Trading Volume'
     )
 
-    volume_fig.update_traces(marker=dict(color="#1E90FF", line=dict(color="#00D9FF", width=1)))
+    volume_fig.update_traces(marker=dict(color="#00D9FF", line=dict(color="#00D9FF", width=1)))
     volume_fig.update_layout(
         template="plotly_dark",
         height=350,
@@ -733,7 +733,7 @@ with tab2:
             y=thyao['MACD_SIGNAL'],
             mode='lines',
             name='Signal',
-            line=dict(color="#FF6B9D", width=2, dash="dash")
+            line=dict(color="#32CD32", width=2, dash="dash")
         )
     )
 
@@ -769,7 +769,7 @@ with tab3:
             y=thyao['BB_HIGH'],
             mode='lines',
             name='Upper Band',
-            line=dict(color="#32CD32", dash="dash", width=2)
+            line=dict(color="#FF6B9D", dash="dash", width=2)
         )
     )
 
@@ -779,7 +779,7 @@ with tab3:
             y=thyao['BB_LOW'],
             mode='lines',
             name='Lower Band',
-            line=dict(color="#FF6B9D", dash="dash", width=2),
+            line=dict(color="#32CD32", dash="dash", width=2),
             fill='tonexty',
             fillcolor='rgba(50, 205, 50, 0.1)'
         )
@@ -844,7 +844,7 @@ with financial_col1:
         title="Quarterly Profit"
     )
 
-    profit_fig.update_traces(marker=dict(color="#00D9FF", line=dict(color="#1E90FF", width=2)))
+    profit_fig.update_traces(marker=dict(color="#00D9FF", line=dict(color="#00D9FF", width=2)))
     profit_fig.update_layout(
         template="plotly_dark",
         height=400,
@@ -911,7 +911,7 @@ with financial_col2:
         title="Liabilities"
     )
 
-    liabilities_fig.update_traces(marker=dict(color="#FFA500", line=dict(color="#FF6B9D", width=2)))
+    liabilities_fig.update_traces(marker=dict(color="#FF6B9D", line=dict(color="#FF6B9D", width=2)))
     liabilities_fig.update_layout(
         template="plotly_dark",
         height=400,
@@ -1023,7 +1023,7 @@ with col1:
         title="Capacity Utilization (%)"
     )
 
-    capacity_fig.update_traces(marker=dict(color="#32CD32", line=dict(color="#1E90FF", width=2)))
+    capacity_fig.update_traces(marker=dict(color="#32CD32", line=dict(color="#32CD32", width=2)))
     capacity_fig.update_layout(
         template="plotly_dark",
         height=400,
@@ -1045,7 +1045,7 @@ with col2:
         markers=True
     )
 
-    revenue_fig.update_traces(line=dict(color="#FFA500", width=3), marker=dict(size=10))
+    revenue_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
     revenue_fig.update_layout(
         template="plotly_dark",
         height=400,

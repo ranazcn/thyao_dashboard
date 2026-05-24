@@ -35,22 +35,22 @@ st.markdown("""
 }
 
 .main {
-    background: linear-gradient(135deg, #0f1219 0%, #1a1f2e 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     animation: fadeIn 0.6s ease-out;
 }
 
 [data-testid="stMetric"] {
-    background: linear-gradient(135deg, #1a222f 0%, #242d3a 100%);
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
     padding: 20px;
     border-radius: 12px;
-    border: 1px solid #3a4a5f;
+    border: 1px solid #2a5f8a;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
 
 [data-testid="stMetric"]:hover {
     transform: translateY(-2px);
-    box-shadow: 0px 4px 16px rgba(52, 152, 219, 0.2);
+    box-shadow: 0px 4px 16px rgba(52, 152, 219, 0.3);
     border-color: #3498db;
 }
 
@@ -90,7 +90,7 @@ h2 {
     margin-top: 35px;
     margin-bottom: 20px;
     letter-spacing: 0px;
-    border-bottom: 2px solid #3a4a5f;
+    border-bottom: 2px solid #2a5f8a;
     padding-bottom: 10px;
 }
 
@@ -102,7 +102,7 @@ h3 {
 }
 
 hr {
-    border: 1px solid #3a4a5f;
+    border: 1px solid #2a5f8a;
     margin: 30px 0 !important;
     opacity: 0.5;
 }
@@ -117,30 +117,30 @@ hr {
 /* Tab Styling */
 [data-baseweb="tab"] {
     border-radius: 8px !important;
-    background: #1a222f !important;
-    border: 1px solid #3a4a5f !important;
-    color: #95a5a6 !important;
+    background: #0f3460 !important;
+    border: 1px solid #2a5f8a !important;
+    color: #bdc3c7 !important;
     font-weight: 600;
     transition: all 0.2s ease;
     cursor: pointer;
 }
 
 [data-baseweb="tab"]:hover {
-    background: #242d3a !important;
+    background: #16213e !important;
     border-color: #3498db !important;
     color: #ecf0f1 !important;
 }
 
 [data-baseweb="tab"][aria-selected="true"] {
-    background: #2c3e50 !important;
+    background: #1f4788 !important;
     border-color: #3498db !important;
     color: #ecf0f1 !important;
 }
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0f1219 0%, #1a1f2e 100%);
-    border-right: 1px solid #3a4a5f;
+    background: linear-gradient(180deg, #1a1a2e 0%, #0f3460 100%);
+    border-right: 1px solid #2a5f8a;
 }
 
 /* Checkbox and Radio */
@@ -157,15 +157,15 @@ hr {
 
 /* Selectbox Button */
 [data-testid="baseButton-secondary"] {
-    background: #1a222f !important;
-    border: 1px solid #3a4a5f !important;
+    background: #0f3460 !important;
+    border: 1px solid #2a5f8a !important;
     color: #bdc3c7 !important;
     font-weight: 600;
     transition: all 0.2s ease;
 }
 
 [data-testid="baseButton-secondary"]:hover {
-    background: #242d3a !important;
+    background: #16213e !important;
     border-color: #3498db !important;
     color: #ecf0f1 !important;
 }
@@ -235,8 +235,8 @@ current_account['Year'] = current_account['Year'].astype(str)
 # COLOR SCHEMES
 # =====================================================
 
-color_discrete = ["#00D9FF", "#32CD32", "#1E90FF", "#FF6B9D", "#FFA500"]
-color_gradient = ["#00D9FF", "#1E90FF", "#8B00FF"]
+color_discrete = ["#3498db", "#2ecc71", "#e74c3c", "#f39c12", "#9b59b6"]
+color_gradient = ["#3498db", "#2ecc71", "#e74c3c"]
 
 close = thyao['close_price']
 
@@ -339,13 +339,13 @@ with col1:
         markers=True
     )
 
-    gdp_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10, color="#32CD32"))
+    gdp_fig.update_traces(line=dict(color="#3498db", width=3), marker=dict(size=10, color="#2ecc71"))
     gdp_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF", family="Segoe UI"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1", family="Segoe UI"),
         hovermode="x unified"
     )
 
@@ -362,13 +362,13 @@ with col2:
         title="Unemployment Trend"
     )
 
-    unemployment_fig.update_traces(line=dict(color="#FF6B9D", width=3), marker=dict(size=10))
+    unemployment_fig.update_traces(line=dict(color="#e74c3c", width=3), marker=dict(size=10))
     unemployment_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF", family="Segoe UI"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1", family="Segoe UI"),
         hovermode="x unified"
     )
 
@@ -414,13 +414,13 @@ with macro_col1:
         markers=True
     )
 
-    interest_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
+    interest_fig.update_traces(line=dict(color="#3498db", width=3), marker=dict(size=10))
     interest_fig.update_layout(
         template="plotly_dark",
         height=350,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -436,13 +436,13 @@ with macro_col2:
         markers=True
     )
 
-    inflation_fig.update_traces(line=dict(color="#FF6B9D", width=3), marker=dict(size=10))
+    inflation_fig.update_traces(line=dict(color="#e74c3c", width=3), marker=dict(size=10))
     inflation_fig.update_layout(
         template="plotly_dark",
         height=350,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -460,13 +460,13 @@ with macro_col1:
         markers=True
     )
 
-    kur_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
+    kur_fig.update_traces(line=dict(color="#3498db", width=3), marker=dict(size=10))
     kur_fig.update_layout(
         template="plotly_dark",
         height=350,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -482,13 +482,13 @@ with macro_col2:
         markers=True
     )
 
-    gold_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
+    gold_fig.update_traces(line=dict(color="#f39c12", width=3), marker=dict(size=10))
     gold_fig.update_layout(
         template="plotly_dark",
         height=350,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -506,13 +506,13 @@ with macro_col1:
         markers=True
     )
 
-    current_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
+    current_fig.update_traces(line=dict(color="#3498db", width=3), marker=dict(size=10))
     current_fig.update_layout(
         template="plotly_dark",
         height=350,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -532,9 +532,9 @@ with macro_col2:
     budget_fig.update_layout(
         template="plotly_dark",
         height=350,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified",
         coloraxis_showscale=False
     )
@@ -561,13 +561,13 @@ yield_fig = px.area(
     title="Yield Curve"
 )
 
-yield_fig.update_traces(fillcolor="rgba(0, 217, 255, 0.3)", line=dict(color="#00D9FF", width=3))
+yield_fig.update_traces(fillcolor="rgba(52, 152, 219, 0.3)", line=dict(color="#3498db", width=3))
 yield_fig.update_layout(
     template="plotly_dark",
     height=450,
-    plot_bgcolor="#0f1729",
-    paper_bgcolor="#0a0e27",
-    font=dict(color="#A0C4FF"),
+    plot_bgcolor="#16213e",
+    paper_bgcolor="#0f1a2e",
+    font=dict(color="#ecf0f1"),
     hovermode="x unified"
 )
 
@@ -579,7 +579,7 @@ st.markdown("---")
 # 3. THYAO STOCK PRICE
 # =====================================================
 
-st.header("3. THYAO Hisse Fiyatı")
+st.header("3. THYAO Stock Price")
 
 price_fig = go.Figure()
 
@@ -594,8 +594,8 @@ if chart_type == "Candlestick":
             low=thyao['low'],
             close=thyao['close_price'],
             name='THYAO',
-            increasing_line_color='#32CD32',
-            decreasing_line_color='#FF6B9D'
+            increasing_line_color='#2ecc71',
+            decreasing_line_color='#e74c3c'
         )
     )
 
@@ -608,7 +608,7 @@ else:
             y=thyao['close_price'],
             mode='lines',
             name='Close Price',
-            line=dict(width=3, color="#00D9FF")
+            line=dict(width=3, color="#3498db")
         )
     )
 
@@ -621,7 +621,7 @@ if show_ma:
             y=thyao['MA20'],
             mode='lines',
             name='MA20',
-            line=dict(color="#32CD32", width=2, dash="dash")
+            line=dict(color="#2ecc71", width=2, dash="dash")
         )
     )
 
@@ -631,7 +631,7 @@ if show_ma:
             y=thyao['MA50'],
             mode='lines',
             name='MA50',
-            line=dict(color="#FF6B9D", width=2, dash="dot")
+            line=dict(color="#e74c3c", width=2, dash="dot")
         )
     )
 
@@ -640,9 +640,9 @@ price_fig.update_layout(
     height=650,
     xaxis_rangeslider_visible=False,
     hovermode="x unified",
-    plot_bgcolor="#0f1729",
-    paper_bgcolor="#0a0e27",
-    font=dict(color="#A0C4FF")
+    plot_bgcolor="#16213e",
+    paper_bgcolor="#0f1a2e",
+    font=dict(color="#ecf0f1")
 )
 
 st.plotly_chart(price_fig, use_container_width=True)
@@ -657,13 +657,13 @@ if show_volume:
         title='Trading Volume'
     )
 
-    volume_fig.update_traces(marker=dict(color="#00D9FF", line=dict(color="#00D9FF", width=1)))
+    volume_fig.update_traces(marker=dict(color="#3498db", line=dict(color="#3498db", width=1)))
     volume_fig.update_layout(
         template="plotly_dark",
         height=350,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -694,19 +694,19 @@ with tab1:
             y=thyao['RSI'],
             mode='lines',
             name='RSI',
-            line=dict(color="#00D9FF", width=3)
+            line=dict(color="#3498db", width=3)
         )
     )
 
-    rsi_fig.add_hline(y=70, line_dash="dash", line_color="#FF6B9D", annotation_text="Overbought")
-    rsi_fig.add_hline(y=30, line_dash="dash", line_color="#32CD32", annotation_text="Oversold")
+    rsi_fig.add_hline(y=70, line_dash="dash", line_color="#e74c3c", annotation_text="Overbought")
+    rsi_fig.add_hline(y=30, line_dash="dash", line_color="#2ecc71", annotation_text="Oversold")
 
     rsi_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -723,7 +723,7 @@ with tab2:
             y=thyao['MACD'],
             mode='lines',
             name='MACD',
-            line=dict(color="#00D9FF", width=3)
+            line=dict(color="#3498db", width=3)
         )
     )
 
@@ -733,16 +733,16 @@ with tab2:
             y=thyao['MACD_SIGNAL'],
             mode='lines',
             name='Signal',
-            line=dict(color="#32CD32", width=2, dash="dash")
+            line=dict(color="#2ecc71", width=2, dash="dash")
         )
     )
 
     macd_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -759,7 +759,7 @@ with tab3:
             y=thyao['close_price'],
             mode='lines',
             name='Close Price',
-            line=dict(color="#00D9FF", width=3)
+            line=dict(color="#3498db", width=3)
         )
     )
 
@@ -769,7 +769,7 @@ with tab3:
             y=thyao['BB_HIGH'],
             mode='lines',
             name='Upper Band',
-            line=dict(color="#FF6B9D", dash="dash", width=2)
+            line=dict(color="#e74c3c", dash="dash", width=2)
         )
     )
 
@@ -779,18 +779,18 @@ with tab3:
             y=thyao['BB_LOW'],
             mode='lines',
             name='Lower Band',
-            line=dict(color="#32CD32", dash="dash", width=2),
+            line=dict(color="#2ecc71", dash="dash", width=2),
             fill='tonexty',
-            fillcolor='rgba(50, 205, 50, 0.1)'
+            fillcolor='rgba(46, 204, 113, 0.1)'
         )
     )
 
     bollinger_fig.update_layout(
         template="plotly_dark",
         height=450,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -844,13 +844,13 @@ with financial_col1:
         title="Quarterly Profit"
     )
 
-    profit_fig.update_traces(marker=dict(color="#00D9FF", line=dict(color="#00D9FF", width=2)))
+    profit_fig.update_traces(marker=dict(color="#3498db", line=dict(color="#3498db", width=2)))
     profit_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -866,13 +866,13 @@ with financial_col2:
         markers=True
     )
 
-    revenue_fig.update_traces(line=dict(color="#32CD32", width=3), marker=dict(size=10))
+    revenue_fig.update_traces(line=dict(color="#2ecc71", width=3), marker=dict(size=10))
     revenue_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -890,13 +890,13 @@ with financial_col1:
         markers=True
     )
 
-    assets_fig.update_traces(line=dict(color="#FF6B9D", width=3), marker=dict(size=10))
+    assets_fig.update_traces(line=dict(color="#e74c3c", width=3), marker=dict(size=10))
     assets_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -911,13 +911,13 @@ with financial_col2:
         title="Liabilities"
     )
 
-    liabilities_fig.update_traces(marker=dict(color="#FF6B9D", line=dict(color="#FF6B9D", width=2)))
+    liabilities_fig.update_traces(marker=dict(color="#e74c3c", line=dict(color="#e74c3c", width=2)))
     liabilities_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -978,13 +978,13 @@ with col1:
         markers=True
     )
 
-    passenger_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
+    passenger_fig.update_traces(line=dict(color="#3498db", width=3), marker=dict(size=10))
     passenger_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -1000,13 +1000,13 @@ with col2:
         title="Jet Fuel Prices"
     )
 
-    fuel_fig.update_traces(fillcolor="rgba(255, 107, 157, 0.3)", line=dict(color="#FF6B9D", width=3))
+    fuel_fig.update_traces(fillcolor="rgba(231, 76, 60, 0.3)", line=dict(color="#e74c3c", width=3))
     fuel_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -1023,13 +1023,13 @@ with col1:
         title="Capacity Utilization (%)"
     )
 
-    capacity_fig.update_traces(marker=dict(color="#32CD32", line=dict(color="#32CD32", width=2)))
+    capacity_fig.update_traces(marker=dict(color="#2ecc71", line=dict(color="#2ecc71", width=2)))
     capacity_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="#0f1729",
-        paper_bgcolor="#0a0e27",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 
@@ -1045,13 +1045,13 @@ with col2:
         markers=True
     )
 
-    revenue_fig.update_traces(line=dict(color="#00D9FF", width=3), marker=dict(size=10))
+    revenue_fig.update_traces(line=dict(color="#3498db", width=3), marker=dict(size=10))
     revenue_fig.update_layout(
         template="plotly_dark",
         height=400,
-        plot_bgcolor="rgba(15, 23, 42, 0.5)",
-        paper_bgcolor="rgba(10, 14, 39, 0.3)",
-        font=dict(color="#A0C4FF"),
+        plot_bgcolor="#16213e",
+        paper_bgcolor="#0f1a2e",
+        font=dict(color="#ecf0f1"),
         hovermode="x unified"
     )
 

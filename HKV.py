@@ -29,208 +29,168 @@ st.markdown("""
     padding: 0;
 }
 
-@keyframes glow {
-    0% { box-shadow: 0px 0px 10px rgba(0, 217, 255, 0.5); }
-    50% { box-shadow: 0px 0px 30px rgba(0, 217, 255, 0.8); }
-    100% { box-shadow: 0px 0px 10px rgba(0, 217, 255, 0.5); }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .main {
-    background: linear-gradient(135deg, #050a1f 0%, #0a0e27 25%, #0f1729 50%, #1a1f3a 75%, #050a1f 100%);
-    background-size: 400% 400%;
-    animation: fadeInUp 0.8s ease-out;
+    background: linear-gradient(135deg, #0f1219 0%, #1a1f2e 100%);
+    animation: fadeIn 0.6s ease-out;
 }
 
 [data-testid="stMetric"] {
-    background: linear-gradient(135deg, #1a4a5a 0%, #0f2a3a 50%, #1a3a4a 100%);
+    background: linear-gradient(135deg, #1a222f 0%, #242d3a 100%);
     padding: 20px;
-    border-radius: 15px;
-    border: 2px solid #00D9FF;
-    box-shadow: 0px 8px 32px rgba(31, 193, 250, 0.3), inset 0 1px 0 rgba(255,255,255,0.1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: fadeInUp 0.6s ease-out backwards;
+    border-radius: 12px;
+    border: 1px solid #3a4a5f;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
 [data-testid="stMetric"]:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 16px 48px rgba(31, 193, 250, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
-    border-color: #32CD32;
-    animation: glow 2s infinite;
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 16px rgba(52, 152, 219, 0.2);
+    border-color: #3498db;
 }
 
 [data-testid="stMetricValue"] {
-    color: #00D9FF;
+    color: #ecf0f1;
     font-size: 32px !important;
-    font-weight: 800 !important;
-    text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
-    letter-spacing: 1px;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
 }
 
 [data-testid="stMetricLabel"] {
-    color: #A0C4FF;
-    font-size: 14px;
-    font-weight: 700;
+    color: #95a5a6;
+    font-size: 13px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.8px;
 }
 
 [data-testid="stMetricDelta"] {
-    color: #32CD32;
-    font-weight: 700;
+    color: #2ecc71;
+    font-weight: 600;
     font-size: 14px;
 }
 
 h1 {
-    background: linear-gradient(135deg, #00D9FF 0%, #32CD32 30%, #1E90FF 60%, #FF6B9D 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ecf0f1;
     font-size: 48px !important;
-    font-weight: 900 !important;
-    text-shadow: 0px 4px 20px rgba(0, 217, 255, 0.4);
-    letter-spacing: 2px;
-    animation: slideIn 0.8s ease-out;
+    font-weight: 700 !important;
+    letter-spacing: 0px;
+    margin-bottom: 5px;
 }
 
 h2 {
-    background: linear-gradient(135deg, #1E90FF 0%, #00D9FF 50%, #32CD32 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-size: 32px !important;
-    font-weight: 800 !important;
-    margin-top: 40px;
-    margin-bottom: 25px;
-    letter-spacing: 1px;
-    animation: slideIn 0.7s ease-out;
+    color: #bdc3c7;
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    letter-spacing: 0px;
+    border-bottom: 2px solid #3a4a5f;
+    padding-bottom: 10px;
 }
 
 h3 {
-    color: #00D9FF;
-    font-size: 18px !important;
-    font-weight: 800 !important;
-    text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
-    letter-spacing: 1px;
+    color: #95a5a6;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
 }
 
 hr {
-    border: 2px solid;
-    border-image: linear-gradient(90deg, #00D9FF, #32CD32, #1E90FF) 1;
-    margin: 40px 0 !important;
-    opacity: 0.6;
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+    border: 1px solid #3a4a5f;
+    margin: 30px 0 !important;
+    opacity: 0.5;
 }
 
 .block-container {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 /* Tab Styling */
 [data-baseweb="tab"] {
-    border-radius: 12px !important;
-    background: linear-gradient(135deg, #1a3a4a 0%, #0f2a3a 100%) !important;
-    border: 2px solid #00D9FF !important;
-    color: #A0C4FF !important;
-    font-weight: 700;
-    transition: all 0.3s ease;
+    border-radius: 8px !important;
+    background: #1a222f !important;
+    border: 1px solid #3a4a5f !important;
+    color: #95a5a6 !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
 [data-baseweb="tab"]:hover {
-    background: linear-gradient(135deg, #1E90FF, #00D9FF) !important;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    background: #242d3a !important;
+    border-color: #3498db !important;
+    color: #ecf0f1 !important;
 }
 
 [data-baseweb="tab"][aria-selected="true"] {
-    background: linear-gradient(135deg, #1E90FF, #00D9FF) !important;
-    border: 2px solid #32CD32 !important;
-    color: white !important;
-    box-shadow: 0px 8px 24px rgba(0, 217, 255, 0.6);
+    background: #2c3e50 !important;
+    border-color: #3498db !important;
+    color: #ecf0f1 !important;
 }
 
 /* Sidebar */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #050a1f 0%, #0f172a 50%, #1a1f3a 100%);
-    border-right: 2px solid #00D9FF;
-    box-shadow: 10px 0 40px rgba(0, 217, 255, 0.1);
+    background: linear-gradient(180deg, #0f1219 0%, #1a1f2e 100%);
+    border-right: 1px solid #3a4a5f;
 }
 
 /* Checkbox and Radio */
 [data-testid="stCheckbox"] label, [data-testid="stRadio"] label {
-    color: #A0C4FF !important;
-    font-weight: 700;
-    transition: all 0.3s ease;
+    color: #bdc3c7 !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
     cursor: pointer;
-    text-shadow: 0 0 10px rgba(0, 217, 255, 0.2);
 }
 
 [data-testid="stCheckbox"] label:hover, [data-testid="stRadio"] label:hover {
-    color: #00D9FF !important;
-    text-shadow: 0 0 15px rgba(0, 217, 255, 0.5);
+    color: #ecf0f1 !important;
 }
 
-/* Selectbox */
+/* Selectbox Button */
 [data-testid="baseButton-secondary"] {
-    background: linear-gradient(135deg, #1a3a4a 0%, #0f2a3a 100%) !important;
-    border: 2px solid #00D9FF !important;
-    color: #00D9FF !important;
-    font-weight: 700;
-    transition: all 0.3s ease;
+    background: #1a222f !important;
+    border: 1px solid #3a4a5f !important;
+    color: #bdc3c7 !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
 [data-testid="baseButton-secondary"]:hover {
-    background: linear-gradient(135deg, #1E90FF, #00D9FF) !important;
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
-    transform: scale(1.02);
+    background: #242d3a !important;
+    border-color: #3498db !important;
+    color: #ecf0f1 !important;
 }
 
 /* Subheader */
 [data-testid="stSubheaderMain"] {
-    color: #00D9FF;
-    text-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-/* Plotly Charts Container */
-.plot-container {
-    animation: fadeInUp 0.8s ease-out;
+    color: #bdc3c7;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 /* Smooth transitions for all interactive elements */
 input, button, select, textarea {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.2s ease;
 }
 
 input:focus, button:focus, select:focus, textarea:focus {
     outline: none;
-    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+    border-color: #3498db !important;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1) !important;
+}
+
+/* Select text color */
+p, label, span {
+    color: #bdc3c7;
 }
 
 </style>

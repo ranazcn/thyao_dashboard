@@ -842,18 +842,18 @@ with tabs[1]:
         st.info("MACD overlay is disabled or has insufficient historical data.")
 
 with tabs[2]:
-    st.subheader("THYAO - TradingView Grafiği")
+    st.subheader("THYAO - TradingView Chart")
     st.markdown("""
-    > **Not:** TradingView'ın ücretsiz embed widget'ı Borsa İstanbul (BIST) sembollerini
-    > desteklemiyor. Aşağıdaki butona tıklayarak THYAO grafiğini TradingView'da açabilirsin.
+    > **Note:** TradingView's free embed widget does not support Borsa Istanbul (BIST) symbols.
+    > Click the button below to view the THYAO chart on TradingView.
     """)
     tv_link_html = """
     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;
                 gap:20px; padding: 60px 20px; text-align:center;">
       <div style="font-size:64px;">📈</div>
       <div style="color:#94a3b8; font-size:16px; max-width:480px;">
-        TradingView'da <strong style="color:#38bdf8;">BIST:THYAO</strong> grafiğini
-        gerçek zamanlı olarak incelemek için butona tıkla.
+        View <strong style="color:#38bdf8;">BIST:THYAO</strong> live on TradingView
+        with real-time data, indicators and drawing tools.
       </div>
       <a href="https://www.tradingview.com/chart/?symbol=BIST%3ATHYAO"
          target="_blank"
@@ -862,7 +862,7 @@ with tabs[2]:
                 border-radius:10px; text-decoration:none; letter-spacing:0.5px;
                 box-shadow:0 4px 15px rgba(2,132,199,0.4);
                 transition:all 0.2s ease;">
-        🚀 TradingView'da Aç
+        🚀 Open on TradingView
       </a>
     </div>
     """

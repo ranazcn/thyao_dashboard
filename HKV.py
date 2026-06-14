@@ -537,7 +537,7 @@ def fetch_stock_data(symbol, timeframe):
     return df
 
 
-def add_technical_indicators(df):
+def add_technical_indicators(df, ma_short=20, ma_long=50):
     if df.empty or len(df) < 20:
         return df
     try:
@@ -549,8 +549,8 @@ def add_technical_indicators(df):
         bb = BollingerBands(close=close, window=20)
         df["BB_HIGH"] = bb.bollinger_hband()
         df["BB_LOW"] = bb.bollinger_lband()
-        df["MA20"] = close.rolling(window=20).mean()
-        df["MA50"] = close.rolling(window=50).mean()
+        df[f"MA{ma_short}"] = close.rolling(window=ma_short).mean()
+        df[f"MA{ma_long}"] = close.rolling(window=ma_long).mean()
     except Exception:
         pass
     return df
@@ -585,7 +585,7 @@ def calculate_dynamic_beta(thyao_df, bist_df):
 # DATA INITIALIZATION & TIME FRAME STATE
 # =====================================================
 
-if "timeframe" not in st.session_state:
+if "timeframe" not in st.session_state or st.session_state.timeframe in ("1h", "4h"):
     st.session_state.timeframe = "1y"
 
 st.info(f"⏰ Last update: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -603,8 +603,10 @@ chart_type = st.sidebar.radio("Chart Type", ["Line", "Candlestick", "Bar"], inde
 show_volume = st.sidebar.checkbox("Show Volume", value=True, key="show_volume_checkbox")
 
 st.sidebar.markdown("### 📈 Indicator Overlays")
-show_ma20 = st.sidebar.checkbox("Show MA20", value=True)
-show_ma50 = st.sidebar.checkbox("Show MA50", value=True)
+show_ma_short = st.sidebar.checkbox("Show MA (Short)", value=True)
+ma_short_period = st.sidebar.number_input("Short MA Period", min_value=5, max_value=200, value=20, step=1, key="ma_short_input")
+show_ma_long = st.sidebar.checkbox("Show MA (Long)", value=True)
+ma_long_period = st.sidebar.number_input("Long MA Period", min_value=10, max_value=500, value=50, step=1, key="ma_long_input")
 show_bb = st.sidebar.checkbox("Show Bollinger Bands", value=False)
 
 st.sidebar.markdown("### 📊 Subcharts")
@@ -630,7 +632,7 @@ if thyao.empty:
     st.stop()
 
 # Add technical indicators
-thyao = add_technical_indicators(thyao)
+thyao = add_technical_indicators(thyao, ma_short=ma_short_period, ma_long=ma_long_period)
 
 # Outstanding shares definition for dynamic calculations
 outstanding_shares = 1_380_000_000
@@ -776,8 +778,8 @@ st.header("2. THYAO Stock Price")
 
 # Timeframe selector horizontal columns
 st.write("⏱️ Select Timeframe:")
-t_cols = st.columns(10)
-timeframes = ["1h", "4h", "1d", "1w", "3m", "6m", "1y", "3y", "5y", "All"]
+t_cols = st.columns(8)
+timeframes = ["1d", "1w", "3m", "6m", "1y", "3y", "5y", "All"]
 
 for idx, tf_label in enumerate(timeframes):
     btn_style = "primary" if st.session_state.timeframe == tf_label else "secondary"
@@ -857,23 +859,26 @@ else: # Line Chart
     )
 
 # Indicator Overlays
-if show_ma20 and "MA20" in thyao.columns:
+ma_short_col = f"MA{ma_short_period}"
+ma_long_col = f"MA{ma_long_period}"
+
+if show_ma_short and ma_short_col in thyao.columns:
     price_fig.add_trace(
         go.Scatter(
             x=thyao["Date"],
-            y=thyao["MA20"],
+            y=thyao[ma_short_col],
             mode="lines",
-            name="MA20",
+            name=f"MA{ma_short_period}",
             line=dict(color="#10b981", width=1.5, dash="dash")
         )
     )
-if show_ma50 and "MA50" in thyao.columns:
+if show_ma_long and ma_long_col in thyao.columns:
     price_fig.add_trace(
         go.Scatter(
             x=thyao["Date"],
-            y=thyao["MA50"],
+            y=thyao[ma_long_col],
             mode="lines",
-            name="MA50",
+            name=f"MA{ma_long_period}",
             line=dict(color="#ef4444", width=1.5, dash="dot")
         )
     )

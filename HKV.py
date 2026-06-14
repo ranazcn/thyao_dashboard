@@ -4,7 +4,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-import yfinance as yf
+# yfinance removed – all data loaded from local CSVs
 from ta.momentum import RSIIndicator
 from ta.trend import MACD
 from ta.volatility import BollingerBands
@@ -337,210 +337,64 @@ def load_local_annual(filepath):
         return pd.DataFrame()
 
 
-# Timeframe Resampling
-def resample_4h(df):
-    if df.empty:
-        return df
-    df_temp = df.copy()
-    df_temp.set_index("Date", inplace=True)
-    df_resampled = df_temp.resample("4H").agg({
-        "open": "first",
-        "high": "max",
-        "low": "min",
-        "close_price": "last",
-        "volume": "sum"
-    }).dropna().reset_index()
-    return df_resampled
+# =====================================================
+# CSV-ONLY DATA LOADERS  (yfinance completely removed)
+# =====================================================
 
-
-@st.cache_data(ttl=600, show_spinner=False)
-def load_yahoo_history(symbol, start="2020-01-01", period=None, interval="1d"):
+@st.cache_data(ttl=3600, show_spinner=False)
+def load_thyao_csv():
+    """Load full THYAO price history from local CSV."""
     try:
-        if period:
-            df = yf.download(symbol, period=period, interval=interval, progress=False, auto_adjust=False)
-        else:
-            df = yf.download(symbol, start=start, interval=interval, progress=False, auto_adjust=False)
-
-        if df is None or df.empty:
-            return pd.DataFrame()
-
-        if isinstance(df.columns, pd.MultiIndex):
-            df.columns = df.columns.get_level_values(0)
-
-        df = df.reset_index()
-        df = df.rename(columns={
-            "Open": "open",
-            "High": "high",
-            "Low": "low",
-            "Close": "close_price",
-            "Adj Close": "adj_close",
-            "Volume": "volume"
-        })
-
-        if "Date" not in df.columns and "Datetime" in df.columns:
-            df = df.rename(columns={"Datetime": "Date"})
-
-        df["Date"] = pd.to_datetime(df["Date"])
-        if df["Date"].dt.tz is not None:
-            df["Date"] = df["Date"].dt.tz_localize(None)
+        df = pd.read_csv("data/thyao_price_yahoo_2020_2026.csv")
+        df["Date"] = pd.to_datetime(df["Date"], format="%d.%m.%Y")
+        df = df.sort_values("Date").reset_index(drop=True)
         return df
     except Exception:
         return pd.DataFrame()
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def load_yahoo_info(symbol):
+def load_financial_data():
+    """Load quarterly financials from local CSV."""
     try:
-        return yf.Ticker(symbol).info or {}
-    except Exception:
-        return {}
-
-
-@st.cache_data(ttl=3600, show_spinner=False)
-def load_yahoo_financials(symbol):
-    try:
-        ticker = yf.Ticker(symbol)
-        income = ticker.quarterly_financials
-        balance = ticker.quarterly_balance_sheet
-
-        rows = []
-        all_cols = sorted(set(list(income.columns) + list(balance.columns)))
-
-        for col in all_cols:
-            revenue = income.loc["Total Revenue", col] if "Total Revenue" in income.index and col in income.columns else None
-            profit = income.loc["Net Income", col] if "Net Income" in income.index and col in income.columns else None
-            assets = balance.loc["Total Assets", col] if "Total Assets" in balance.index and col in balance.columns else None
-            liabilities = balance.loc["Total Liabilities Net Minority Interest", col] if "Total Liabilities Net Minority Interest" in balance.index and col in balance.columns else None
-
-            revenue_f = safe_float(revenue)
-            profit_f = safe_float(profit)
-            assets_f = safe_float(assets)
-            liabilities_f = safe_float(liabilities)
-
-            col_date = pd.to_datetime(col)
-
-            rows.append({
-                "Quarter": f"{col_date.year}-Q{col_date.quarter}",
-                "Date": col_date,
-                "Revenue": revenue_f / 1_000_000_000 if revenue_f is not None else None,
-                "Profit": profit_f / 1_000_000_000 if profit_f is not None else None,
-                "Assets": assets_f / 1_000_000_000 if assets_f is not None else None,
-                "Liabilities": liabilities_f / 1_000_000_000 if liabilities_f is not None else None,
-            })
-
-        df = pd.DataFrame(rows).dropna(how="all", subset=["Revenue", "Profit", "Assets", "Liabilities"])
-        if not df.empty:
-            df = df.sort_values("Date")
+        df = pd.read_csv("data/financial_metrics.csv")
+        df.columns = [c.strip() for c in df.columns]
+        for col in ["Profit", "Revenue", "Assets", "Liabilities"]:
+            if col in df.columns:
+                df[col] = pd.to_numeric(df[col], errors="coerce")
+        if "Quarter" not in df.columns:
+            df["Quarter"] = [f"Q{i+1}" for i in range(len(df))]
         return df
     except Exception:
         return pd.DataFrame()
 
 
-@st.cache_data(ttl=3600, show_spinner=False)
-def load_financial_data(symbol):
-    df = load_yahoo_financials(symbol)
+def filter_by_timeframe(df, timeframe):
+    """Filter a full CSV dataframe by the selected timeframe."""
     if df.empty:
-        try:
-            df = pd.read_csv("data/financial_metrics.csv")
-            df.columns = [c.strip() for c in df.columns]
-            for col in ["Profit", "Revenue", "Assets", "Liabilities"]:
-                if col in df.columns:
-                    df[col] = pd.to_numeric(df[col], errors="coerce")
-            # Calculate Quarter label
-            if "Quarter" not in df.columns:
-                df["Quarter"] = [f"Q{i+1}" for i in range(len(df))]
-        except Exception:
-            df = pd.DataFrame()
-    return df
-
-
-@st.cache_data(ttl=600, show_spinner=False)
-def fetch_stock_data(symbol, timeframe):
-    period = "max"
-    interval = "1d"
-    
-    if timeframe == "1h":
-        period = "1mo"
-        interval = "1h"
-    elif timeframe == "4h":
-        period = "3mo"
-        interval = "1h"
-    elif timeframe == "1d":
-        period = "2y"
-        interval = "1d"
-    elif timeframe == "1w":
-        period = "max"
-        interval = "1wk"
-        
-    df = load_yahoo_history(symbol, period=period, interval=interval)
-    
-    if timeframe == "4h" and not df.empty:
-        df = resample_4h(df)
-        
-    # Local CSV fallback if yfinance returns empty
-    if df.empty:
-        if symbol == "THYAO.IS":
-            try:
-                df = pd.read_csv("data/thyao_price_yahoo_2020_2026.csv")
-                df["Date"] = pd.to_datetime(df["Date"], format="%d.%m.%Y")
-                df = df.sort_values("Date")
-            except Exception:
-                pass
-        else:
-            return pd.DataFrame()
-            
-    if df.empty:
-        return pd.DataFrame()
-        
-    # Ensure Date column is datetime
-    df["Date"] = pd.to_datetime(df["Date"])
-    if df["Date"].dt.tz is not None:
-        df["Date"] = df["Date"].dt.tz_localize(None)
+        return df
     latest_date = df["Date"].max()
-    
-    # Check if data is hourly (has non-zero hours)
-    is_hourly = df["Date"].dt.hour.nunique() > 1
-    
-    if timeframe == "1h":
-        if is_hourly:
-            df = df.tail(24)
-        else:
-            # CSV fallback: return enough rows for indicators (last 60 days)
-            df = df[df["Date"] >= latest_date - timedelta(days=60)]
-    elif timeframe == "4h":
-        if is_hourly:
-            df = df.tail(50)
-        else:
-            # CSV fallback: return enough rows for indicators (last 90 days)
-            df = df[df["Date"] >= latest_date - timedelta(days=90)]
-    elif timeframe == "1d":
-        if is_hourly:
-            df = df[df["Date"] >= latest_date - timedelta(days=1)]
-        else:
-            df = df[df["Date"] >= latest_date - timedelta(days=30)]
-    elif timeframe == "1w":
-        if is_hourly:
-            df = df[df["Date"] >= latest_date - timedelta(days=7)]
-        else:
-            df = df[df["Date"] >= latest_date - timedelta(days=90)]
-    elif timeframe == "3m":
-        df = df[df["Date"] >= latest_date - timedelta(days=90)]
-    elif timeframe == "6m":
-        df = df[df["Date"] >= latest_date - timedelta(days=180)]
-    elif timeframe == "1y":
-        df = df[df["Date"] >= latest_date - timedelta(days=365)]
-    elif timeframe == "3y":
-        df = df[df["Date"] >= latest_date - timedelta(days=3*365)]
-    elif timeframe == "5y":
-        df = df[df["Date"] >= latest_date - timedelta(days=5*365)]
-        
-    return df
+    cuts = {
+        "1d":  30,
+        "1w":  90,
+        "3m":  90,
+        "6m":  180,
+        "1y":  365,
+        "3y":  3 * 365,
+        "5y":  5 * 365,
+        "All": None,
+    }
+    days = cuts.get(timeframe, None)
+    if days is None:
+        return df
+    return df[df["Date"] >= latest_date - timedelta(days=days)]
 
 
 def add_technical_indicators(df, ma_short=20, ma_long=50):
     if df.empty or len(df) < 20:
         return df
     try:
+        df = df.copy()
         close = df["close_price"].astype(float)
         df["RSI"] = RSIIndicator(close=close, window=14).rsi()
         macd = MACD(close=close)
@@ -617,18 +471,18 @@ if st.sidebar.button("🔄 Refresh Data", key="refresh_data_button"):
     st.cache_data.clear()
     st.rerun()
 
-# Fetch stock data
-with st.spinner("Fetching market data..."):
-    thyao = fetch_stock_data("THYAO.IS", st.session_state.timeframe)
-    bist100 = fetch_stock_data("XU100.IS", st.session_state.timeframe)
-    pgsus = fetch_stock_data("PGSUS.IS", st.session_state.timeframe)
-    gold = load_yahoo_history("GC=F", start="2020-01-01")
-    brent = load_yahoo_history("BZ=F", start="2020-01-01")
-    thyao_info = load_yahoo_info("THYAO.IS")
-    financial = load_financial_data("THYAO.IS")
+# Load data from CSV only
+with st.spinner("Loading data..."):
+    thyao_full = load_thyao_csv()
+    thyao = filter_by_timeframe(thyao_full, st.session_state.timeframe)
+    # No CSV for BIST100 / PGSUS – peer comparison will show empty gracefully
+    bist100 = pd.DataFrame()
+    pgsus   = pd.DataFrame()
+    thyao_info = {}  # No API – metrics calculated dynamically below
+    financial  = load_financial_data()
 
 if thyao.empty:
-    st.error("THYAO data could not be loaded. Please check CSV data paths or internet connection.")
+    st.error("THYAO data could not be loaded. Please make sure data/thyao_price_yahoo_2020_2026.csv exists.")
     st.stop()
 
 # Add technical indicators

@@ -505,12 +505,14 @@ def fetch_stock_data(symbol, timeframe):
         if is_hourly:
             df = df.tail(24)
         else:
-            df = df[df["Date"] >= latest_date - timedelta(days=5)]
+            # CSV fallback: return enough rows for indicators (last 60 days)
+            df = df[df["Date"] >= latest_date - timedelta(days=60)]
     elif timeframe == "4h":
         if is_hourly:
             df = df.tail(50)
         else:
-            df = df[df["Date"] >= latest_date - timedelta(days=10)]
+            # CSV fallback: return enough rows for indicators (last 90 days)
+            df = df[df["Date"] >= latest_date - timedelta(days=90)]
     elif timeframe == "1d":
         if is_hourly:
             df = df[df["Date"] >= latest_date - timedelta(days=1)]

@@ -842,9 +842,9 @@ with tabs[1]:
         st.info("MACD overlay is disabled or has insufficient historical data.")
 
 with tabs[2]:
-    st.subheader("THYAO on TradingView")
+    st.subheader("THYAO - TradingView Grafiği")
     st.markdown("""
-    > **Not:** TradingView'ın ücretsiz embed widget'ı Borsa Istanbul (BIST) sembollerini
+    > **Not:** TradingView'ın ücretsiz embed widget'ı Borsa İstanbul (BIST) sembollerini
     > desteklemiyor. Aşağıdaki butona tıklayarak THYAO grafiğini TradingView'da açabilirsin.
     """)
     tv_link_html = """

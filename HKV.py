@@ -807,7 +807,7 @@ tf_labels = {
 }
 current_tf_label = tf_labels.get(st.session_state.timeframe, "Daily Interval")
 
-ta_tabs = ["RSI Indicator", "MACD Indicator", "TradingView Widget"]
+ta_tabs = ["RSI Indicator", "MACD Indicator", "TradingView"]
 tabs = st.tabs(ta_tabs)
 
 with tabs[0]:
@@ -842,19 +842,31 @@ with tabs[1]:
         st.info("MACD overlay is disabled or has insufficient historical data.")
 
 with tabs[2]:
-    st.subheader("BIST:THYAO TradingView Advanced Chart")
-    tv_widget_html = """
-    <div class="tradingview-widget-container" style="height:520px; width:100%;">
-      <iframe
-        src="https://s.tradingview.com/embed-widget/advanced-chart/?locale=en#%7B%22symbol%22%3A%22BIST%3ATHYAO%22%2C%22interval%22%3A%22D%22%2C%22timezone%22%3A%22Europe%2FIstanbul%22%2C%22theme%22%3A%22dark%22%2C%22style%22%3A%221%22%2C%22allow_symbol_change%22%3Atrue%2C%22save_image%22%3Atrue%2C%22calendar%22%3Afalse%2C%22hide_volume%22%3Afalse%2C%22support_host%22%3A%22https%3A%2F%2Fwww.tradingview.com%22%7D"
-        style="width:100%; height:520px; border:none;"
-        allowtransparency="true"
-        frameborder="0"
-        scrolling="no">
-      </iframe>
+    st.subheader("THYAO on TradingView")
+    st.markdown("""
+    > **Not:** TradingView'ın ücretsiz embed widget'ı Borsa Istanbul (BIST) sembollerini
+    > desteklemiyor. Aşağıdaki butona tıklayarak THYAO grafiğini TradingView'da açabilirsin.
+    """)
+    tv_link_html = """
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;
+                gap:20px; padding: 60px 20px; text-align:center;">
+      <div style="font-size:64px;">📈</div>
+      <div style="color:#94a3b8; font-size:16px; max-width:480px;">
+        TradingView'da <strong style="color:#38bdf8;">BIST:THYAO</strong> grafiğini
+        gerçek zamanlı olarak incelemek için butona tıkla.
+      </div>
+      <a href="https://www.tradingview.com/chart/?symbol=BIST%3ATHYAO"
+         target="_blank"
+         style="display:inline-block; background:linear-gradient(135deg,#0284c7,#0ea5e9);
+                color:#ffffff; font-weight:700; font-size:15px; padding:14px 32px;
+                border-radius:10px; text-decoration:none; letter-spacing:0.5px;
+                box-shadow:0 4px 15px rgba(2,132,199,0.4);
+                transition:all 0.2s ease;">
+        🚀 TradingView'da Aç
+      </a>
     </div>
     """
-    st.components.v1.html(tv_widget_html, height=540)
+    st.components.v1.html(tv_link_html, height=320)
 
 st.markdown("---")
 

@@ -1127,6 +1127,6 @@ st.markdown("""
 <div style="text-align: center; color: #64748b; font-size: 13px; padding-bottom: 20px;">
     <h3>✈️ HKV Team</h3>
     Financial Management and Investment Dashboard Project<br>
-    Developed with Streamlit, Plotly & Yahoo Finance API
+    Developed with Streamlit & Plotly
 </div>
 """, unsafe_allow_html=True)

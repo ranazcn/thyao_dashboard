@@ -807,7 +807,7 @@ tf_labels = {
 }
 current_tf_label = tf_labels.get(st.session_state.timeframe, "Daily Interval")
 
-ta_tabs = ["RSI Indicator", "MACD Indicator", "TradingView"]
+ta_tabs = ["RSI Indicator", "MACD Indicator"]
 tabs = st.tabs(ta_tabs)
 
 with tabs[0]:
@@ -840,33 +840,6 @@ with tabs[1]:
         st.plotly_chart(macd_fig, use_container_width=True)
     else:
         st.info("MACD overlay is disabled or has insufficient historical data.")
-
-with tabs[2]:
-    st.subheader("THYAO - TradingView Chart")
-    st.markdown("""
-    > **Note:** TradingView's free embed widget does not support Borsa Istanbul (BIST) symbols.
-    > Click the button below to view the THYAO chart on TradingView.
-    """)
-    tv_link_html = """
-    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;
-                gap:20px; padding: 60px 20px; text-align:center;">
-      <div style="font-size:64px;">📈</div>
-      <div style="color:#94a3b8; font-size:16px; max-width:480px;">
-        View <strong style="color:#38bdf8;">BIST:THYAO</strong> live on TradingView
-        with real-time data, indicators and drawing tools.
-      </div>
-      <a href="https://www.tradingview.com/chart/?symbol=BIST%3ATHYAO"
-         target="_blank"
-         style="display:inline-block; background:linear-gradient(135deg,#0284c7,#0ea5e9);
-                color:#ffffff; font-weight:700; font-size:15px; padding:14px 32px;
-                border-radius:10px; text-decoration:none; letter-spacing:0.5px;
-                box-shadow:0 4px 15px rgba(2,132,199,0.4);
-                transition:all 0.2s ease;">
-        🚀 Open on TradingView
-      </a>
-    </div>
-    """
-    st.components.v1.html(tv_link_html, height=320)
 
 st.markdown("---")
 

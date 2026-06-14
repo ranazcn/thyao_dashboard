@@ -381,6 +381,8 @@ def load_yahoo_history(symbol, start="2020-01-01", period=None, interval="1d"):
             df = df.rename(columns={"Datetime": "Date"})
 
         df["Date"] = pd.to_datetime(df["Date"])
+        if df["Date"].dt.tz is not None:
+            df["Date"] = df["Date"].dt.tz_localize(None)
         return df
     except Exception:
         return pd.DataFrame()
@@ -492,6 +494,8 @@ def fetch_stock_data(symbol, timeframe):
         
     # Ensure Date column is datetime
     df["Date"] = pd.to_datetime(df["Date"])
+    if df["Date"].dt.tz is not None:
+        df["Date"] = df["Date"].dt.tz_localize(None)
     latest_date = df["Date"].max()
     
     # Check if data is hourly (has non-zero hours)

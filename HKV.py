@@ -842,30 +842,19 @@ with tabs[1]:
         st.info("MACD overlay is disabled or has insufficient historical data.")
 
 with tabs[2]:
-    st.subheader("BIST:THYAO TradingView Advanced Chart Widget")
+    st.subheader("BIST:THYAO TradingView Advanced Chart")
     tv_widget_html = """
-    <div class="tradingview-widget-container" style="height: 500px; width: 100%;">
-      <div id="tradingview_chart" style="height: 500px; width: 100%;"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-      <script type="text/javascript">
-      new TradingView.widget({
-        "autosize": true,
-        "symbol": "BIST:THYAO",
-        "interval": "D",
-        "timezone": "Europe/Istanbul",
-        "theme": "dark",
-        "style": "1",
-        "locale": "en",
-        "toolbar_bg": "#1e293b",
-        "enable_publishing": false,
-        "hide_side_toolbar": false,
-        "allow_symbol_change": true,
-        "container_id": "tradingview_chart"
-      });
-      </script>
+    <div class="tradingview-widget-container" style="height:520px; width:100%;">
+      <iframe
+        src="https://s.tradingview.com/embed-widget/advanced-chart/?locale=en#%7B%22symbol%22%3A%22BIST%3ATHYAO%22%2C%22interval%22%3A%22D%22%2C%22timezone%22%3A%22Europe%2FIstanbul%22%2C%22theme%22%3A%22dark%22%2C%22style%22%3A%221%22%2C%22allow_symbol_change%22%3Atrue%2C%22save_image%22%3Atrue%2C%22calendar%22%3Afalse%2C%22hide_volume%22%3Afalse%2C%22support_host%22%3A%22https%3A%2F%2Fwww.tradingview.com%22%7D"
+        style="width:100%; height:520px; border:none;"
+        allowtransparency="true"
+        frameborder="0"
+        scrolling="no">
+      </iframe>
     </div>
     """
-    st.components.v1.html(tv_widget_html, height=520)
+    st.components.v1.html(tv_widget_html, height=540)
 
 st.markdown("---")
 

@@ -1015,10 +1015,10 @@ st.header("4. Financial Metrics")
 beta_info = thyao_info.get("beta")
 market_cap_info = thyao_info.get("marketCap")
 trailing_pe_info = thyao_info.get("trailingPE")
-sector_info = thyao_info.get("sector", "Aviation")
+sector_info = "Aviation"  # Force to Aviation since this is a THYAO dashboard
 
-# Fallback/dynamic calculations if yfinance info is empty
-if beta_info is None or pd.isna(beta_info):
+# Fallback/dynamic calculations if yfinance info is empty or corrupt (returns near-zero/negative Beta)
+if beta_info is None or pd.isna(beta_info) or abs(beta_info) < 0.05:
     beta_info = display_beta
 
 if market_cap_info is None or pd.isna(market_cap_info) or market_cap_info <= 0:
